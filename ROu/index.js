@@ -1,8 +1,0 @@
-
-function Route(){
-return(
-    <>
-    </>
-)
-
-}
