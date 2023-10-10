@@ -9,8 +9,13 @@ function middleware(req, res, next) {
     console.log('Middleware console')
     next()
 }
+function ok(req ,res,done){
+    console.log('ok he');
+    done()
+}
 // app.use(morgan('tiny'))
 app.use(middleware)
+app.use(ok)
 app.use('/user',routes)
 // app.use(express.json())
 
