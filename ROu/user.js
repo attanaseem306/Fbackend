@@ -24,6 +24,15 @@ routes.get('/', (req, res) => {
     })
 })
 
+routes.post('/',(req,res)=>{
+    users.push({
+        Name:'New USer',
+        id:users.length+1    
+})
+res.status(200).send({
+    users
+})
+})
 
 
 
