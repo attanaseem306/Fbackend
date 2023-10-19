@@ -11,23 +11,8 @@ mongoose.connect('mongodb+srv://blog:blog@cluster0.k9nakt3.mongodb.net/').then((
 })
 
 
-
-// const morgan = require('morgan');
-// const userRoutes = require('./routes/user')
-
-// function middleware(req, res, next) {
-//     console.log('Middleware console')
-//     next()
-// }
-// function ok(req ,res,done){
-//     console.log('ok he');
-//     done()
-// }
-// app.use(morgan('tiny'))
-// app.use(middleware)
-// app.use(ok)
-app.use('/users',routeUser)
 app.use(express.json())
+app.use('/users',routeUser)
 app.use('/blogs',routeBlog)
 app.get('/',async (req, res) => {
     res.send({
@@ -51,15 +36,6 @@ app.post('/', (req, res) => {
   
 })
 
-// app.get('/about', (req, res) => {
-//     res.send({
-//         status: 200,
-//         msg: "About Route"  
-//     })
-// })
-
-
-// app.use('/user', userRoutes)
 
 const port = 3000
 
