@@ -1,29 +1,14 @@
 const express = require('express');
-const routes = require('./ROu/user');
 const app = express();
 const mongoose=require('mongoose')
-const user=require('./Model/blog')
+const routeBlog = require('./ROu/blog');
+const routeUser = require('./ROu/user');
 
 mongoose.connect('mongodb+srv://blog:blog@cluster0.k9nakt3.mongodb.net/').then(()=>{
     console.log('mongoose Conenct');
 }).catch((error)=>{
     console.log(error);
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -41,38 +26,28 @@ mongoose.connect('mongodb+srv://blog:blog@cluster0.k9nakt3.mongodb.net/').then((
 // app.use(morgan('tiny'))
 // app.use(middleware)
 // app.use(ok)
-app.use('/user',routes)
+app.use('/users',routeUser)
 app.use(express.json())
-
+app.use('/blogs',routeBlog)
 app.get('/',async (req, res) => {
-    const users = await user.find()
     res.send({
         status: 200,
         msg: "API is working fine with nodemon",
-        users
     })
 })
 
-app.get('/:id',async (req, res) => {
-    const users = await user.findById(req.params.id)
+app.get('/:id', (req, res) => {
     res.send({
         status: 200,
         msg: "API is working fine with nodemon",
-        users
     })
 })
 
-app.post('/',async (req, res) => {
-    try{
-        const userCreate = await user.create({...req.body})
+app.post('/', (req, res) => {
         res.send({
             status: 200,
             msg: "API is working fine with nodemon",
-            userCreate
         })
-    }catch(error){
-        console.log(error);
-    }
   
 })
 
