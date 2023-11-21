@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const mongoose=require('mongoose')
 const routeBlog = require('./ROu/blog');
 const routeUser = require('./ROu/user');
-const cors = require('cors');
 
 mongoose.connect('mongodb+srv://blog:blog@cluster0.k9nakt3.mongodb.net/').then(()=>{
     console.log('mongoose Conenct');
@@ -12,8 +12,8 @@ mongoose.connect('mongodb+srv://blog:blog@cluster0.k9nakt3.mongodb.net/').then((
 })
 
 
-app.use(express.json())
 app.use(cors());
+app.use(express.json())
 app.use('/users',routeUser)
 app.use('/blogs',routeBlog)
 app.get('/',async (req, res) => {
