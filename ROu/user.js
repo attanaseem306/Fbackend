@@ -1,6 +1,7 @@
 const app = require('express')
 const users = require('../Model/user')
 const routes = app.Router()
+var cors = require('cors')
 
 routes.get('/', async (req, res) => {
     const user = await users.find()
@@ -11,7 +12,7 @@ routes.get('/', async (req, res) => {
     })
 })
 
-routes.post('/', async (req, res) => {
+routes.post('/',cors(), async (req, res) => {
     const user = await users.create({ ...req.body })
     res.send({
         status: 200,
