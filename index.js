@@ -4,7 +4,7 @@ const cors = require('cors');
 const mongoose=require('mongoose')
 const routeBlog = require('./ROu/blog');
 const routeUser = require('./ROu/user');
-
+// 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
 mongoose.connect('mongodb+srv://blog:blog@cluster0.k9nakt3.mongodb.net/').then(()=>{
     console.log('mongoose Conenct');
 }).catch((error)=>{
