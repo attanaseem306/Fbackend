@@ -39,7 +39,7 @@ routes.put('/:id', (req, res) => {
     const user = users.findByIdAndUpdate({ ...req.body })
     res.send({
         status: 200,
-        user
+        user:user
 
     })
 
@@ -59,6 +59,10 @@ routes.get('/:id', (req, res) => {
 
 
 })
+
+
+
+
 
 
 module.exports = routes
