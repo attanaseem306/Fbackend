@@ -24,7 +24,7 @@ routes.post('/', async (req, res) => {
 
 routes.delete('/:id', async (req, res) => {
 
-    const user = users.findByIdAndDelete({ ...req.body })
+    const user = await users.findByIdAndDelete({ ...req.body })
     res.send({
         status: 200,
         user
@@ -34,9 +34,9 @@ routes.delete('/:id', async (req, res) => {
 })
 
 
-routes.put('/:id', (req, res) => {
+routes.put('/:id', async(req, res) => {
 
-    const user = users.findByIdAndUpdate({ ...req.body })
+    const user = await users.findByIdAndUpdate({ ...req.body })
     res.send({
         status: 200,
         user:user
@@ -47,17 +47,14 @@ routes.put('/:id', (req, res) => {
 })
 
 
-routes.get('/:id', (req, res) => {
+routes.get('/:id', async(req, res) => {
 
-    const user = users.findById(req.params.id)
+    const user = await users.findById(req.params.id)
     res.send({
         status: 200,
         user
 
     })
-
-
-
 })
 
 
