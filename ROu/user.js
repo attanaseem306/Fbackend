@@ -49,7 +49,7 @@ console.log(req.params._id);
     const user = await users.findById(req.params.id);
     res.send({
         status: 200,
-        "user-id":user
+        "user":user
 
     })
 })
