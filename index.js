@@ -19,14 +19,14 @@ app.use('/blogs',routeBlog)
 app.get('/',async (req, res) => {
     res.send({
         status: 200,
-        msg: "API is working fine with nodemon",
+        msg: "API is working fine with nodemon ok",
     })
 })
 
 app.get('/:id', (req, res) => {
     res.send({
         status: 200,
-        msg: "API is working fine with nodemon",
+        msg: "API is working fine with nodemon okid",
     })
 })
 
