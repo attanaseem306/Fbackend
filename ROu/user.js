@@ -20,16 +20,30 @@ routes.post('/', async (req, res) => {
 })
 
 
-
 routes.delete('/:id', async (req, res) => {
+    try {
+        const userId = req.params.id;
 
-    const user = await users.findByIdAndDelete({ ...req.body })
-    res.send({
-        status: 200,
-        "user":user
-      })
-})
+        // Ensure that the provided ID is valid
+        if (!userId) {
+            return res.status(400).send({ status: 400, message: 'Invalid user ID' });
+        }
 
+        // Find the user by ID and delete
+        const deletedUser = await users.findByIdAndDelete(userId);
+
+        // Check if the user was found and deleted successfully
+        if (!deletedUser) {
+            return res.status(404).send({ status: 404, message: 'User not found' });
+        }
+
+        // Send a success message in the response
+        res.status(200).send({ status: 200, message: 'User deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ status: 500, message: 'Internal Server Error' });
+    }
+});
 
 routes.put('/:id', async (req, res) => {
     try {
