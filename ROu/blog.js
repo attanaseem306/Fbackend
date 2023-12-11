@@ -2,24 +2,25 @@ const app = require('express')
 const routes = app.Router()
 const blogs = require('../Model/blog')
 
-routes.get('/', async(req, res) => {
-    const userBlogpost=await blogs.find()
- res.status(200).send({
-    status: 200,
-    user: userBlogpost
+routes.get('/', async (req, res) => {
+    const userBlogpost = await blogs.find()
+    res.status(200).send({
+        status: 200,
+        user: userBlogpost
 
-})
+    })
 })
 
-routes.post('/',async(req,res)=>{
-  
- const userBlogpost=await blogs.create({...req.body})
- res.status(200).send({
-    status: 200,
-    user: userBlogpost
 
-})
- 
+routes.post('/', async (req, res) => {
+
+    const userBlogpost = await blogs.create({ ...req.body })
+    res.status(200).send({
+        status: 200,
+        user: userBlogpost
+
+    })
+
 })
 
 
@@ -28,9 +29,9 @@ routes.post('/',async(req,res)=>{
 
 
 // routes.delete('/:id', (req, res) => {
-  
+
 //     users.splice(req.params.id-1,1)
-    
+
 //     res.status(200).send({
 //         status: 200,
 //         user: users
@@ -40,7 +41,7 @@ routes.post('/',async(req,res)=>{
 
 
 // routes.put('/:id', (req, res) => {
-  
+
 // if (users[req.params.id-1]) {
 //   users[req.params.id-1].name='Change name'
 //   res.status(200).send({
@@ -56,7 +57,7 @@ routes.post('/',async(req,res)=>{
 //         message:'user not found'
 //     })
 // }
-    
+
 // })
 
 
