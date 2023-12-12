@@ -12,6 +12,18 @@ routes.get('/', async (req, res) => {
 })
 
 
+
+routes.get('/:id', async (req, res) => {
+    const id=req.params.id
+    const userBlogpost = await blogs.findById(id)
+    res.status(200).send({
+        status: 200,
+        userBlog: userBlogpost
+
+    })
+})
+
+
 routes.post('/', async (req, res) => {
 
     const userBlogpost = await blogs.create({ ...req.body })
