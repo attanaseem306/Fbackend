@@ -6,7 +6,7 @@ routes.get('/', async (req, res) => {
     const userBlogpost = await blogs.find()
     res.status(200).send({
         status: 200,
-        user: userBlogpost
+        userBlog: userBlogpost
 
     })
 })
@@ -17,7 +17,7 @@ routes.post('/', async (req, res) => {
     const userBlogpost = await blogs.create({ ...req.body })
     res.status(200).send({
         status: 200,
-        user: userBlogpost
+        userBlog: userBlogpost
 
     })
 
@@ -28,28 +28,61 @@ routes.post('/', async (req, res) => {
 
 
 
-// routes.delete('/:id', (req, res) => {
+routes.delete('/:id',async (req, res) => {
 
-//     users.splice(req.params.id-1,1)
+    try {
+        const id = req.params.id;
 
-//     res.status(200).send({
-//         status: 200,
-//         user: users
+        // Ensure that the provided ID is valid
+        if (!id) {
+            return res.status(400).send({ status: 400, message: 'Invalid user ID' });
+        }
 
-//     })
-// })
+        // Find the user by ID and delete
+        const DeleteBlog = await blogs.findByIdAndDelete(id);
+
+        // Check if the user was found and deleted successfully
+        if (!DeleteBlog) {
+            return res.status(404).send({ status: 404, message: 'Blog not found' });
+        }
+
+        // Send a success message in the response
+        res.status(200).send({ status: 200, message: 'Blog deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ status: 500, message: 'Internal Server Error' });
+    }
+})
 
 
-// routes.put('/:id', (req, res) => {
 
-// if (users[req.params.id-1]) {
-//   users[req.params.id-1].name='Change name'
-//   res.status(200).send({
-//     status: 200,
-//     message: users
-// })
+routes.put('/:id',async (req, res) => {
 
-// }    
+try {
+    const id = req.params.id;
+    const updatedUserData = req.body;
+
+    // Ensure that the provided ID is valid
+    if (!id) {
+        return res.status(400).send({ status: 400, message: 'Invalid user ID' });
+    }
+
+    // Find the user by ID and update the data
+    const blog = await blogs.findByIdAndUpdate(id, updatedUserData, { new: true });
+
+    // Check if the user was found and updated successfully
+    if (!blog) {
+        return res.status(404).send({ status: 404, message: 'blog not found' });
+    }
+
+    // Send the updated user data as a response
+    res.status(200).send({ status: 200, blog });
+} catch (error) {
+    console.error(error);
+    res.status(500).send({ status: 500, message: 'Internal Server Error' });
+}
+
+} )   
 
 // else{
 //     res.status(200).send({
